@@ -40,7 +40,7 @@
         color: #009bce;
       }
       header {
-        background: Tomato;
+        background: #1e4d62;
         color: white;
         text-align: center;
         margin: 0 0 40px 0;
@@ -72,6 +72,7 @@
         display: inline-block;
         width: 40%;
         text-align: left;
+        float:left;
       }
       li{
         text-align: right;
@@ -182,7 +183,11 @@
         font-size: 28px;
       }
       amp-accordion{
-        display: inline-block!important;
+        position: relative;
+        width: 151px;
+        margin: 0;
+        float: right;
+        right: 30px;
       }
       .box-shadow-menu {
         padding-left: 25px;
@@ -198,17 +203,25 @@
         background: white;
         box-shadow: 0 0.25em 0 0 white, 0 0.5em 0 0 white;
       }
-      .i-amphtml-accordion-header {
+      section h4.box-shadow-menu{
+        background: #1e4d62;
+        color: #fff;
+        padding: 0 0 0 16px;
+        line-height: 43px;
+        border: none;
+
+      }
+      .accordion-header {
         cursor: pointer;
-        background-color: #1e4d62!important;
+        background-color: #1e4d62;
         padding-right: 0;
-        border: 1px solid #1e4d62!important;
+        border: 1px solid #1e4d62;
         color: #fff;
         font-size: 40px;
         text-align: right;
         margin: 0;
         padding-left: 48px;
-        line-height: 52px;
+        line-height: 47px;
         text-transform: uppercase;
       }
     </style>
@@ -234,25 +247,20 @@
     @section('sidebar')
     <header>
       <div class="container sidebar">
-        <div class="logo-icon" style='float:left'>
+        <div class="logo-icon">
           <a href="http://www.winsports.co">
-            <img src="//www.winsports.co/assets/img/win/winsports_2017.png"
+            <amp-img src="//www.winsports.co/assets/img/win/winsports_2017.png"
                  alt="Winsports"
-                 id="logowin"
-                 width='90px'>
+                 width='90'
+                 height='48'>
           </a>
         </div>
         <amp-accordion disable-session-states>
           <section>
-            <button class="box-shadow-menu" type="button">Menú</button>
+            <h4 class="box-shadow-menu">Menú</h4>
             <section>
               <li class="home">
-                  <a href="http://www.winsports.co" ng-click="reload_home()">Inicio</a>
-              </li>
-              <li>
-                  <a class="menu-logo" href="/" ng-click="reload_home()">
-                      <img src="/assets/img/win/winsports-fix_2017.png" alt="Home">
-                  </a>
+                  <a href="http://www.winsports.co">Inicio</a>
               </li>
               <li>
                   <a href="http://www.winsports.co/liga-aguila/multimedia/galeria-goles">Goles</a>

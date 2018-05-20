@@ -21,7 +21,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <link rel="shortcut icon" href="http://www.winsports.co/assets/img/icon/winsports.ico" type="image/vnd.microsoft.icon">
-    <title>Amp Winsports - @yield('title')</title>
+    <title>Amp Winsports - {{$content->title}}</title>
     <style amp-custom>
       body {
         width: auto;

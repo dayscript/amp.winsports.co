@@ -77,6 +77,7 @@
       li{
         text-align: right;
         list-style: none;
+        padding-right: 10px;
 
       }
       li a{
@@ -182,22 +183,28 @@
       h1{
         font-size: 28px;
       }
-      amp-accordion{
+      amp-sidebar{
         position: relative;
         width: 151px;
         margin: 0;
         float: right;
         right: 30px;
+        background: #183e4e;
       }
       .box-shadow-menu {
-        padding-left: 25px;
+        /*padding-left: 25px; */
         font-size: 40px;
+        background: #1e4d62;
+        border: none;
+        top: 13px;
+        position: absolute;
+        right: 63px;
       }
       .box-shadow-menu:before {
         content: "";
         position: absolute;
-        left: 0;
-        top: 0.25em;
+        /* left: 0; */
+        top: 30px;
         width: 1em;
         height: 0.15em;
         background: white;
@@ -239,8 +246,8 @@
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
     <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
-    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
   </head>
 
   <body>
@@ -255,48 +262,46 @@
                  height='48'>
           </a>
         </div>
-        <amp-accordion disable-session-states>
-          <section>
-            <h4 class="box-shadow-menu">Menú</h4>
-            <section>
-              <li class="home">
-                  <a href="http://www.winsports.co">Inicio</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/liga-aguila/multimedia/galeria-goles">Goles</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/wincast">Wincast</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/concursos">Concursos</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/futbol-colombiano/multimedia/videos">Videos</a>
-              </li>
-              <li><a href="http://www.winsports.co/programas">Programas</a></li>
-              <li>
-                  <a href="http://www.winsports.co/futbol-colombiano">Fútbol Colombiano</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/seleccion-colombia">Selección Colombia</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/futbol-internacional">Fútbol Internacional</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/rusia-2018">Rusia 2018</a>
-              </li>
-              <li>
-                  <a href="http://www.winsports.co/otros-deportes">Otros deportes</a>
-              </li>
-              <li><a href="http://www.winsports.co/programacion">Partidos X TV</a></li>
-
-            </section>
-          </section>
-        </amp-accordion>
+          <button on="tap:sidebar.open" class="ampstart-btn caps m2 box-shadow-menu"></button>
       </div>
     </header>
+    <amp-sidebar id="sidebar" layout="nodisplay" side="right">
+      <ul>
+      <li class="home">
+          <a href="http://www.winsports.co">Inicio</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/liga-aguila/multimedia/galeria-goles">Goles</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/wincast">Wincast</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/concursos">Concursos</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/futbol-colombiano/multimedia/videos">Videos</a>
+      </li>
+      <li><a href="http://www.winsports.co/programas">Programas</a></li>
+      <li>
+          <a href="http://www.winsports.co/futbol-colombiano">Fútbol Colombiano</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/seleccion-colombia">Selección Colombia</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/futbol-internacional">Fútbol Internacional</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/rusia-2018">Rusia 2018</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/otros-deportes">Otros deportes</a>
+      </li>
+      <li><a href="http://www.winsports.co/programacion">Partidos X TV</a></li>
+    </ul>
+  </amp-sidebar>
+
     <amp-analytics type="googleanalytics">
       <script type="application/json">
       {

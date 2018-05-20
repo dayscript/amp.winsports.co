@@ -124,8 +124,14 @@ class ArticleController extends Controller
       }
       $content = json_decode($article->content);
 
+      $assetType = self::assetType($content);
 
-      return view('article', compact('article','content') );
+      // retrun json for describe object
+      if( isset($_GET['json']) ){
+          return response()->json($content);
+      }
+
+      return view('article', compact('article','content','assetType') );
 
     }
 
@@ -158,9 +164,53 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
-      
-      return view('article', compact('article','content') );
+
+      $assetType = self::assetType($content);
+
+      if( isset($_GET['json']) ){
+          return response()->json($content);
+      }
+
+      return view('article', compact('article','content','assetType') );
     }
+
+    /**
+     * Show the specified resource for Google AMP.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function showAmpMultimedia($type, $category, $title){
+      $re = '/[0-9]+\s*$/';
+      $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
+
+      if(!$extract_nid){
+        return view('not-found');
+      }
+
+      $nid = $nid[0][0];
+      $article = Article::where('nid',$nid)->first();
+
+      if( !$article ){
+          $amazon_data = self::getAwsItem($nid);
+          $article = new Article();
+          $article->nid = $amazon_data->nid;
+          $article->type = $amazon_data->type;
+          $article->path = $amazon_data->path;
+          $article->content = json_encode($amazon_data);
+          $article->save();
+      }
+      $content = json_decode($article->content);
+
+      $assetType = self::assetType($content);
+
+      if( isset($_GET['json']) ){
+          return response()->json($content);
+      }
+
+      return view('multimedia', compact('article','content','assetType') );
+    }
+
 
     /**
      * GET the specified resource for Amazon S3
@@ -177,4 +227,52 @@ class ArticleController extends Controller
       $res = $client->request('GET', $file['@metadata']['effectiveUri']);
       return json_decode($res->getBody());
     }
+
+    /**
+     * Return asset type 'Mediastream, Yotube, JWPlayer'
+     *
+     * @param  $content (Object)
+     * @return $type String
+     */
+
+    function assetType($content){
+
+      if(isset($content->field_codigo_mediastream->und[0]->value)){
+        return 'mediastream';
+      }
+
+      if( isset($content->field_url->und[0]->value) ){
+        if( strpos('https://youtu.be', $content->field_url->und[0]->value) == 0 || strpos('https://www.youtube.com/',$content->field_url->und[0]->value) == 0 ){
+          return 'youtube';
+        }
+        else{
+          return 'jwplayer';
+        }
+      }
+    }
+
+    /**
+     * Return asset type 'Mediastream, Yotube, JWPlayer'
+     *
+     * @param  $content (Object)
+     * @return $type String
+     */
+
+    public  static function getMediaId($string){
+      if(strpos($string,'https://youtu.be/') !== false ){
+        return substr(parse_url($string,PHP_URL_PATH),1);
+      }
+
+      if(strpos($string,'https://www.youtube.com/watch') !== false){
+        parse_str(parse_url($string,PHP_URL_QUERY), $output);
+        return $output['v'];
+      }
+
+    }
+
+    public static function getThumbnail($string){
+
+      return 'https://i.ytimg.com/vi/'. self::getMediaId($string) .'/hqdefault.jpg';
+    }
+
 }

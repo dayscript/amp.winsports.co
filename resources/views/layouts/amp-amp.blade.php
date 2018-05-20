@@ -42,7 +42,6 @@
       header {
         background: Tomato;
         color: white;
-        font-size: 2em;
         text-align: center;
         margin: 0 0 40px 0;
       }
@@ -71,18 +70,33 @@
       }
       .logo-icon{
         display: inline-block;
-        width: 100%;
+        width: 40%;
         text-align: left;
       }
+      li{
+        text-align: right;
+        list-style: none;
+
+      }
+      li a{
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 9px 0px;
+        display: inline-block;
+        text-transform: uppercase;
+      }
+
+
       .container{
-        padding: 10px;
+        padding: 20px 10px 10px 10px;
       }
       .sidebar{
         background: #1e4d62;
+        display: inline-block;
+        width: 100%;
       }
-      .container{
-        padding: 10px;
-      }
+
       .main-footer{
         background: #1e4d62;
         padding: 5px 30px;
@@ -167,6 +181,36 @@
       h1{
         font-size: 28px;
       }
+      amp-accordion{
+        display: inline-block!important;
+      }
+      .box-shadow-menu {
+        padding-left: 25px;
+        font-size: 40px;
+      }
+      .box-shadow-menu:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.25em;
+        width: 1em;
+        height: 0.15em;
+        background: white;
+        box-shadow: 0 0.25em 0 0 white, 0 0.5em 0 0 white;
+      }
+      .i-amphtml-accordion-header {
+        cursor: pointer;
+        background-color: #1e4d62!important;
+        padding-right: 0;
+        border: 1px solid #1e4d62!important;
+        color: #fff;
+        font-size: 40px;
+        text-align: right;
+        margin: 0;
+        padding-left: 48px;
+        line-height: 52px;
+        text-transform: uppercase;
+      }
     </style>
     <style amp-boilerplate>
       body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes   -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
@@ -181,23 +225,85 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
   </head>
 
   <body>
     @section('sidebar')
     <header>
       <div class="container sidebar">
-        <div class="logo-icon">
-          <a href="/">
+        <div class="logo-icon" style='float:left'>
+          <a href="http://www.winsports.co">
             <img src="//www.winsports.co/assets/img/win/winsports_2017.png"
                  alt="Winsports"
                  id="logowin"
                  width='90px'>
           </a>
         </div>
+        <amp-accordion disable-session-states>
+          <section>
+            <button class="box-shadow-menu" type="button">Menú</button>
+            <section>
+              <li class="home">
+                  <a href="http://www.winsports.co" ng-click="reload_home()">Inicio</a>
+              </li>
+              <li>
+                  <a class="menu-logo" href="/" ng-click="reload_home()">
+                      <img src="/assets/img/win/winsports-fix_2017.png" alt="Home">
+                  </a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/liga-aguila/multimedia/galeria-goles">Goles</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/wincast">Wincast</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/concursos">Concursos</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/futbol-colombiano/multimedia/videos">Videos</a>
+              </li>
+              <li><a href="http://www.winsports.co/programas">Programas</a></li>
+              <li>
+                  <a href="http://www.winsports.co/futbol-colombiano">Fútbol Colombiano</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/seleccion-colombia">Selección Colombia</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/futbol-internacional">Fútbol Internacional</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/rusia-2018">Rusia 2018</a>
+              </li>
+              <li>
+                  <a href="http://www.winsports.co/otros-deportes">Otros deportes</a>
+              </li>
+              <li><a href="http://www.winsports.co/programacion">Partidos X TV</a></li>
+
+            </section>
+          </section>
+        </amp-accordion>
       </div>
     </header>
-
+    <amp-analytics type="googleanalytics">
+      <script type="application/json">
+      {
+        "vars": {
+          "account": "UA-37954209-1"
+        },
+        "triggers": {
+          "trackPageview": {
+            "on": "visible",
+            "request": "pageview"
+          }
+        }
+      }
+      </script>
+    </amp-analytics>
     @show
 
    <div class="container">

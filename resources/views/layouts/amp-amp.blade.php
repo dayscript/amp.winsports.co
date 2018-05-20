@@ -20,8 +20,8 @@
     <link rel="shortcut icon" href="amp_favicon.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-
-    <title>App Name - @yield('title')</title>
+    <link rel="shortcut icon" href="http://www.winsports.co/assets/img/icon/winsports.ico" type="image/vnd.microsoft.icon">
+    <title>Amp Winsports - @yield('title')</title>
     <style amp-custom>
       body {
         width: auto;

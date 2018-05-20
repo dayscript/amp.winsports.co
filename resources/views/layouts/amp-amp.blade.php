@@ -165,8 +165,8 @@
       }
       @font-face {
         font-family: 'ptsans-narrow';
-        src: url('/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.eot');
-        src: local('☺'), url('/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.woff') format('woff'), url('/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.ttf') format('truetype'), url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.svg') format('svg');
+        src: url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.eot');
+        src: local('☺'), url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.woff') format('woff'), url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.ttf') format('truetype'), url('/assets/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.svg') format('svg');
         font-weight: normal;
         font-style: normal;
       }

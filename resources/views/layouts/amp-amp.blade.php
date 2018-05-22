@@ -20,8 +20,8 @@
     <link rel="shortcut icon" href="amp_favicon.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-
-    <title>App Name - @yield('title')</title>
+    <link rel="shortcut icon" href="http://www.winsports.co/assets/img/icon/winsports.ico" type="image/vnd.microsoft.icon">
+    <title>Amp Winsports - {{$content->title}}</title>
     <style amp-custom>
       body {
         width: auto;
@@ -40,9 +40,8 @@
         color: #009bce;
       }
       header {
-        background: Tomato;
+        background: #1e4d62;
         color: white;
-        font-size: 2em;
         text-align: center;
         margin: 0 0 40px 0;
       }
@@ -71,18 +70,35 @@
       }
       .logo-icon{
         display: inline-block;
-        width: 100%;
+        width: 40%;
         text-align: left;
+        float:left;
       }
+      li{
+        text-align: right;
+        list-style: none;
+        padding-right: 10px;
+
+      }
+      li a{
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 9px 0px;
+        display: inline-block;
+        text-transform: uppercase;
+      }
+
+
       .container{
-        padding: 10px;
+        padding: 20px 10px 10px 10px;
       }
       .sidebar{
         background: #1e4d62;
+        display: inline-block;
+        width: 100%;
       }
-      .container{
-        padding: 10px;
-      }
+
       .main-footer{
         background: #1e4d62;
         padding: 5px 30px;
@@ -149,8 +165,8 @@
       }
       @font-face {
         font-family: 'ptsans-narrow';
-        src: url('http://www.winsports.co/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.eot');
-        src: local('☺'), url('http://www.winsports.co/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.woff') format('woff'), url('http://www.winsports.co/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.ttf') format('truetype'), url('http://www.winsports.co/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.svg') format('svg');
+        src: url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.eot');
+        src: local('☺'), url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.woff') format('woff'), url('/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.ttf') format('truetype'), url('/assets/assets/fonts/ptsans-narrow-bold/PTSans-Narrow-Bold.svg') format('svg');
         font-weight: normal;
         font-style: normal;
       }
@@ -167,6 +183,54 @@
       h1{
         font-size: 28px;
       }
+      amp-sidebar{
+        position: relative;
+        width: 151px;
+        margin: 0;
+        float: right;
+        right: 30px;
+        background: #183e4e;
+      }
+      .box-shadow-menu {
+        /*padding-left: 25px; */
+        font-size: 40px;
+        background: #1e4d62;
+        border: none;
+        top: 13px;
+        position: absolute;
+        right: 63px;
+      }
+      .box-shadow-menu:before {
+        content: "";
+        position: absolute;
+        /* left: 0; */
+        top: 30px;
+        width: 1em;
+        height: 0.15em;
+        background: white;
+        box-shadow: 0 0.25em 0 0 white, 0 0.5em 0 0 white;
+      }
+      section h4.box-shadow-menu{
+        background: #1e4d62;
+        color: #fff;
+        padding: 0 0 0 16px;
+        line-height: 43px;
+        border: none;
+
+      }
+      .accordion-header {
+        cursor: pointer;
+        background-color: #1e4d62;
+        padding-right: 0;
+        border: 1px solid #1e4d62;
+        color: #fff;
+        font-size: 40px;
+        text-align: right;
+        margin: 0;
+        padding-left: 48px;
+        line-height: 47px;
+        text-transform: uppercase;
+      }
     </style>
     <style amp-boilerplate>
       body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes   -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
@@ -181,6 +245,9 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
   </head>
 
   <body>
@@ -188,16 +255,68 @@
     <header>
       <div class="container sidebar">
         <div class="logo-icon">
-          <a href="/">
-            <img src="//www.winsports.co/assets/img/win/winsports_2017.png"
+          <a href="http://www.winsports.co">
+            <amp-img src="//www.winsports.co/assets/img/win/winsports_2017.png"
                  alt="Winsports"
-                 id="logowin"
-                 width='90px'>
+                 width='90'
+                 height='48'>
           </a>
         </div>
+          <button on="tap:sidebar.open" class="ampstart-btn caps m2 box-shadow-menu"></button>
       </div>
     </header>
+    <amp-sidebar id="sidebar" layout="nodisplay" side="right">
+      <ul>
+      <li class="home">
+          <a href="http://www.winsports.co">Inicio</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/liga-aguila/multimedia/galeria-goles">Goles</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/wincast">Wincast</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/concursos">Concursos</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/futbol-colombiano/multimedia/videos">Videos</a>
+      </li>
+      <li><a href="http://www.winsports.co/programas">Programas</a></li>
+      <li>
+          <a href="http://www.winsports.co/futbol-colombiano">Fútbol Colombiano</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/seleccion-colombia">Selección Colombia</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/futbol-internacional">Fútbol Internacional</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/rusia-2018">Rusia 2018</a>
+      </li>
+      <li>
+          <a href="http://www.winsports.co/otros-deportes">Otros deportes</a>
+      </li>
+      <li><a href="http://www.winsports.co/programacion">Partidos X TV</a></li>
+    </ul>
+  </amp-sidebar>
 
+    <amp-analytics type="googleanalytics">
+      <script type="application/json">
+      {
+        "vars": {
+          "account": "UA-37954209-1"
+        },
+        "triggers": {
+          "trackPageview": {
+            "on": "visible",
+            "request": "pageview"
+          }
+        }
+      }
+      </script>
+    </amp-analytics>
     @show
 
    <div class="container">

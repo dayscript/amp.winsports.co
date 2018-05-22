@@ -167,7 +167,7 @@ return [
         /*
          * AMAZON AWS Service Providers...
          */
-        Aws\Laravel\AwsServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class, 
         //Lullabot\AMP\AMP::class
 
 

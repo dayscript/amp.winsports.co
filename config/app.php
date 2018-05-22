@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'AMPP Winsports'),
+    'name' => env('APP_NAME', 'AMP Winsports'),
 
     /*
     |--------------------------------------------------------------------------

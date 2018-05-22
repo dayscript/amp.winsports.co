@@ -168,7 +168,7 @@ return [
          * AMAZON AWS Service Providers...
          */
         Aws\Laravel\AwsServiceProvider::class,
-        // Lullabot\AMP\AMP::class
+        Lullabot\AMP\AMP::class
 
 
     ],
@@ -221,7 +221,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'AmpRouter' => Just\Amp\Laravel\AmpRouteFacade::class,
         'AWS' => Aws\Laravel\AwsFacade::class,
-        //'AMP' => Lullabot\AMP\AMP::class
+        'AMP' => Lullabot\AMP\AMP::class
 
 
     ],

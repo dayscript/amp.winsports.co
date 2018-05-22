@@ -65,12 +65,14 @@
           @break
 
           @default
-          <amp-youtube
-            data-videoid="{{ArticleController::getMediaId($content->field_url->und[0]->value)}}"
-            layout="responsive"
-            width="480" height="270">
-          </amp-youtube>
-    @endswitch
+            @if(isset($content->field_url->und[0]->value))
+              <amp-youtube
+                data-videoid="{{ArticleController::getMediaId($content->field_url->und[0]->value)}}"
+                layout="responsive"
+                width="480" height="270">
+              </amp-youtube>
+            @endif
+      @endswitch
     @endif
     {{-- Type Image --}}
     @if( isset($content->field_image->und[0]->realpath) && !isset($content->field_is_video_article->und[0]->value ) || !$content->field_is_video_article->und[0]->value )

@@ -130,7 +130,6 @@ class ArticleController extends Controller
       $assetType = self::assetType($content);
       $amp->loadHtml($content->body->und[0]->value);
       $content->body->und[0]->value = $amp->convertToAmpHtml();
-
       // retrun json for describe object
       if( isset($_GET['json']) ){
           return response()->json($content);
@@ -268,6 +267,7 @@ class ArticleController extends Controller
      */
 
     public  static function getMediaId($string){
+
       if(strpos($string,'https://youtu.be/') !== false ){
         return substr(parse_url($string,PHP_URL_PATH),1);
       }

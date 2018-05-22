@@ -6,6 +6,8 @@ use AWS;
 use App\Article;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Lullabot\AMP\AMP;
+use Lullabot\AMP\Validate\Scope;
 
 class ArticleController extends Controller
 {
@@ -102,6 +104,7 @@ class ArticleController extends Controller
      */
     public function showAmpForCategory($type, $category, $title)
     {
+      $amp = new AMP();
 
       $re = '/[0-9]+\s*$/';
       $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
@@ -123,7 +126,8 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
-
+      $amp->loadHtml($content->body->und[0]->value);
+      $content->body->und[0]->value = $amp->convertToAmpHtml();
 
       return view('article', compact('article','content') );
 
@@ -137,6 +141,7 @@ class ArticleController extends Controller
      */
     public function showAmp($type, $title)
     {
+      $amp = new AMP();
 
       $re = '/[0-9]+\s*$/';
       $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
@@ -158,6 +163,8 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
+      $amp->loadHtml($content->body->und[0]->value);
+      $content->body->und[0]->value = $amp->convertToAmpHtml();
       
       return view('article', compact('article','content') );
     }

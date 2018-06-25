@@ -33,3 +33,4 @@ Route::amp('{type}/{category}/noticias/{title}', ['as' => 'articleForCategory', 
 Route::amp('{type}/{category}/multimedia/videos/{title}', ['as' => 'multimediaForCategory', 'uses' => 'ArticleController@showAmpMultimedia']);
 Route::amp('{type}/multimedia/galeria-goles/{title}', ['as' => 'multimediaForGalleryGoals', 'uses' => 'ArticleController@showAmpGalleryGoalsMultimedia']);
 Route::amp('{type}/{category}/multimedia/galeria-imagenes/{title}', ['as' => 'multimediaForGallery', 'uses' => 'ArticleController@showAmpGalleryMultimedia']);
+Route::amp('{type}/multimedia/galeria-imagenes/{title}', ['as' => 'multimediaForGallery', 'uses' => 'ArticleController@showAmpGalleryMultimedia']);

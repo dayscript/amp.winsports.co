@@ -223,13 +223,15 @@ class ArticleController extends Controller
       return view('multimedia', compact('article','content','assetType') );
     }
 
+
+
     /**
      * Show the specified resource for Google AMP.
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function showAmpGalleryMultimedia($type, $category, $title){
+    public function showAmpGalleryMultimediaNonCategory($type, $title){
       $re = '/[0-9]+\s*$/';
       $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
 
@@ -250,14 +252,14 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
-      // dd($content->field_image->und);
+      //dd($content->field_image->und);
       $assetType = self::assetType($content);
 
       if( isset($_GET['json']) ){
           return response()->json($content);
       }
 
-      return view('multimedia-gallery', compact('article','content','assetType') );
+      return view('gallery-non-category', compact('article','content','assetType') );
     }
 
     /**
@@ -294,9 +296,44 @@ class ArticleController extends Controller
           return response()->json($content);
       }
 
-      return view('multimedia-gallery-goals', compact('article','content','assetType') );
+      return view('goals', compact('article','content','assetType') );
     }
 
+    /**
+     * Show the specified resource for Google AMP.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function showAmpGallery($type, $category, $title){
+      $re = '/[0-9]+\s*$/';
+      $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
+
+      if(!$extract_nid){
+        return view('not-found');
+      }
+
+      $nid = $nid[0][0];
+      $article = Article::where('nid',$nid)->first();
+
+      if( !$article ){
+          $amazon_data = self::getAwsItem($nid);
+          $article = new Article();
+          $article->nid = $amazon_data->nid;
+          $article->type = $amazon_data->type;
+          $article->path = $amazon_data->path;
+          $article->content = json_encode($amazon_data);
+          $article->save();
+      }
+      $content = json_decode($article->content);
+      $assetType = self::assetType($content);
+
+      if( isset($_GET['json']) ){
+          return response()->json($content);
+      }
+
+      return view('gallery', compact('article','content','assetType') );
+    }
 
 
 

@@ -30,3 +30,4 @@ Route::resource('article', 'ArticleController');
 Route::amp('{type}/noticias/{title}', ['as' => 'article', 'uses' => 'ArticleController@showAmp']);
 Route::amp('{type}/{category}/noticias/{title}', ['as' => 'articleForCategory', 'uses' => 'ArticleController@showAmpForCategory']);
 Route::amp('{type}/{category}/multimedia/videos/{title}', ['as' => 'multimediaForCategory', 'uses' => 'ArticleController@showAmpMultimedia']);
+Route::amp('{type}/{category}/multimedia/galeria-imagenes/{title}', ['as' => 'multimediaForGallery', 'uses' => 'ArticleController@showAmpGalleryMultimedia']);

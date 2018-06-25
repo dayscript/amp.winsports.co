@@ -128,8 +128,11 @@ class ArticleController extends Controller
       $content = json_decode($article->content);
 
       $assetType = self::assetType($content);
-      $amp->loadHtml($content->body->und[0]->value);
-      $content->body->und[0]->value = $amp->convertToAmpHtml();
+
+      if(isset($content->body->und[0]->value)){
+        $amp->loadHtml($content->body->und[0]->value);
+        $content->body->und[0]->value = $amp->convertToAmpHtml();
+      }
       // retrun json for describe object
       if( isset($_GET['json']) ){
           return response()->json($content);
@@ -151,13 +154,13 @@ class ArticleController extends Controller
 
       $re = '/[0-9]+\s*$/';
       $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
-
       if(!$extract_nid){
         return view('not-found');
       }
 
       $nid = $nid[0][0];
       $article = Article::where('nid',$nid)->first();
+
 
       if( !$article ){
           $amazon_data = self::getAwsItem($nid);
@@ -169,15 +172,16 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
-
       $assetType = self::assetType($content);
 
       if( isset($_GET['json']) ){
           return response()->json($content);
       }
 
-      $amp->loadHtml($content->body->und[0]->value);
-      $content->body->und[0]->value = $amp->convertToAmpHtml();
+      if(isset($content->body->und[0]->value)){
+        $amp->loadHtml($content->body->und[0]->value);
+        $content->body->und[0]->value = $amp->convertToAmpHtml();
+      }
 
       return view('article', compact('article','content','assetType') );
     }

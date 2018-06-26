@@ -77,7 +77,7 @@
       @endswitch
     @endif
     {{-- Type Image --}}
-    @if( isset($content->field_image->und[0]->realpath) && !isset($content->field_is_video_article->und[0]->value ) || !$content->field_is_video_article->und[0]->value )
+    @if( isset($content->field_image->und[0]->realpath) && !isset($content->field_is_video_article->und[0]->value ) )
       <amp-img alt="A view of the sea"
         src="{{$content->field_image->und[0]->realpath}}"
         width="{{$content->field_image->und[0]->width}}"

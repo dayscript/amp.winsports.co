@@ -1,8 +1,9 @@
+<?php use App\Http\Controllers\ArticleController;?>
 @extends('layouts.amp')
 
 @section('title', 'Page Title')
 
-@section('content')
+@section('content') 
   <article>
     <div class="medium-12">
       <span class="medium-4 text-left text-category uppercase">{{ $content->field_categoria->und[0]->name }}</span>

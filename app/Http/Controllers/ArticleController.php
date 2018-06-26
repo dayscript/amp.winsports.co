@@ -383,7 +383,7 @@ class ArticleController extends Controller
      * @return $type String
      */
 
-    public  static function getMediaId($string){
+    public static function getMediaId($string){
 
       if(strpos($string,'https://youtu.be/') !== false ){
         return substr(parse_url($string,PHP_URL_PATH),1);

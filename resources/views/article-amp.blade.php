@@ -20,7 +20,9 @@
 
     <div class="medium-12">
       <div class="medium-4">
+        @if(isset($content->field_fuente->und[0]->name))
         <span class="autor" >Por: {{ $content->field_fuente->und[0]->name }}</span>
+        @endif
       </div>
       <div class="medium-8 social">
         <amp-social-share type="twitter" width="30" height="30"></amp-social-share>

@@ -212,8 +212,8 @@ class ArticleController extends Controller
           $article->content = json_encode($amazon_data);
           $article->save();
       }
+      
       $content = json_decode($article->content);
-
       $assetType = self::assetType($content);
 
       if( isset($_GET['json']) ){
@@ -361,19 +361,37 @@ class ArticleController extends Controller
      */
 
     function assetType($content){
-
+      $content = self::pathSecure($content);
       if(isset($content->field_codigo_mediastream->und[0]->value)){
         return 'mediastream';
       }
 
       if( isset($content->field_url->und[0]->value) ){
-        if( strpos('https://youtu.be', $content->field_url->und[0]->value) == 0 || strpos('https://www.youtube.com/',$content->field_url->und[0]->value) == 0 ){
+        if( strpos('https://youtu.be', $content->field_url->und[0]->value) == 0 || 
+            strpos('https://www.youtube.com/',$content->field_url->und[0]->value) == 0 ){
           return 'youtube';
         }
         else{
           return 'jwplayer';
         }
       }
+    }
+
+    /**
+     * Return Path Secure HTTPS
+     *
+     * @param  $content (Object)
+     * @return $type Object
+     */
+
+    function pathSecure($content){
+      if( isset($content->field_url->und[0]->value) ){
+        $content->field_url->und[0]->value = str_replace('http','https',$content->field_url->und[0]->value);
+      }
+      if( isset($content->field_url->und[0]->safe_value) ){
+        $content->field_url->und[0]->safe_value = str_replace('http','https',$content->field_url->und[0]->safe_value);
+      }
+      return $content;
     }
 
     /**
@@ -397,7 +415,6 @@ class ArticleController extends Controller
     }
 
     public static function getThumbnail($string){
-
       return 'https://i.ytimg.com/vi/'. self::getMediaId($string) .'/hqdefault.jpg';
     }
 

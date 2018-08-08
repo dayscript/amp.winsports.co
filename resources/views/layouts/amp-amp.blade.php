@@ -284,7 +284,7 @@
       </div>
     </header>
     <amp-sidebar id="sidebar" layout="nodisplay" side="right">
-      <ul>
+    <ul>
       <li class="home">
           <a href="http://www.winsports.co">Inicio</a>
       </li>
@@ -300,7 +300,9 @@
       <li>
           <a href="http://www.winsports.co/futbol-colombiano/multimedia/videos">Videos</a>
       </li>
-      <li><a href="http://www.winsports.co/programas">Programas</a></li>
+      <li>
+        <a href="http://www.winsports.co/programas">Programas</a>
+      </li>
       <li>
           <a href="http://www.winsports.co/futbol-colombiano">Fútbol Colombiano</a>
       </li>
@@ -316,9 +318,11 @@
       <li>
           <a href="http://www.winsports.co/otros-deportes">Otros deportes</a>
       </li>
-      <li><a href="http://www.winsports.co/programacion">Partidos X TV</a></li>
+      <li>
+        <a href="http://www.winsports.co/programacion">Partidos X TV</a>
+      </li>
     </ul>
-  </amp-sidebar>
+    </amp-sidebar>
 
     <amp-analytics type="googleanalytics">
       <script type="application/json">

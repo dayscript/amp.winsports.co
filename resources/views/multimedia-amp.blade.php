@@ -62,7 +62,9 @@
           width="480" height="270">
         </amp-nexxtv-player> --}}
         @break
-
+        @case('vimeo') {{-- Vimeo --}}
+       
+        @break
         @default
         <amp-youtube
           data-videoid="{{ArticleController::getMediaId($content->field_url->und[0]->value)}}"

@@ -365,14 +365,14 @@ class ArticleController extends Controller
       if(isset($content->field_codigo_mediastream->und[0]->value)){
         return 'mediastream';
       }
-
       if( isset($content->field_url->und[0]->value) ){
-        if( strpos('https://youtu.be', $content->field_url->und[0]->value) == 0 || 
-            strpos('https://www.youtube.com/',$content->field_url->und[0]->value) == 0 ){
+        if( strpos($content->field_url->und[0]->value, 'https://youtu.be') !== false || 
+            strpos($content->field_url->und[0]->value, 'https://www.youtube.com') !== false ){
           return 'youtube';
-        }
-        else{
-          return 'jwplayer';
+        }elseif( strpos($content->field_url->und[0]->value, 'player.vimeo.com') !== false ){
+            return 'vimeo';
+        }else{
+            return 'jwplayer';
         }
       }
     }
@@ -386,10 +386,12 @@ class ArticleController extends Controller
 
     function pathSecure($content){
       if( isset($content->field_url->und[0]->value) ){
-        $content->field_url->und[0]->value = str_replace('http','https',$content->field_url->und[0]->value);
+        $content->field_url->und[0]->value = str_replace('http://','https://',$content->field_url->und[0]->value);
+        $content->field_url->und[0]->value = str_replace('http://','https://',$content->field_url->und[0]->value);
       }
       if( isset($content->field_url->und[0]->safe_value) ){
-        $content->field_url->und[0]->safe_value = str_replace('http','https',$content->field_url->und[0]->safe_value);
+        $content->field_url->und[0]->safe_value = str_replace('http://','https://',$content->field_url->und[0]->safe_value);
+        $content->field_url->und[0]->safe_value = str_replace('http://','https://',$content->field_url->und[0]->safe_value);
       }
       return $content;
     }

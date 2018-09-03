@@ -21,7 +21,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <link rel="shortcut icon" href="http://www.winsports.co/assets/img/icon/winsports.ico" type="image/vnd.microsoft.icon">
-    <title>Amp Winsports - {{$content->title}}</title>
+    <title>{{$content->title}} | Win Sports</title>
     <style amp-custom>
       body {
         width: auto;
@@ -252,7 +252,7 @@
       </style>
     </noscript>
 
-    <link rel="canonical" href="{{$article->path}}">
+    <link rel="canonical" href="https://www.winsports.co{{$article->path}}">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>

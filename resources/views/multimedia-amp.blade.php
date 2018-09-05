@@ -3,6 +3,44 @@
 
 @section('title', 'Page Title')
 
+@section('meta_data') 
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{isset($content->path) ? "https://www.winsports.co".$content->path : ""}}"
+      },
+      "headline": "{{isset($content->title) ? $content->title : ""}}",
+      "datePublished": "{{isset($content->created) ? Carbon\Carbon::parse( Carbon\Carbon::createFromTimestamp($content->created,'America/Bogota')->toDayDateTimeString() )->format('Y-m-d H:i:s') : ""}}",
+      "dateModified": "{{isset($content->changed) ? Carbon\Carbon::parse( Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString() )->format('Y-m-d H:i:s') : ""}}",
+      "description": "{{isset($content->field_lead->und[0]->value) ? $content->field_lead->und[0]->value : ""}}",
+      "author": {
+          "@type": "Organization",
+          "name": "Win Sports",
+          "description": "El canal oficial de la Liga y el Fútbol Profesional Colombiano. Encontrarás, además, la mejor información de Baloncesto, Futsal y Otros Deportes.",
+      },
+      "publisher": {
+          "@type": "Organization",
+          "name": "Win Sports",
+          "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.winsports.co/logo-win-micro_2017.png",
+              "width": 113,
+              "height": 60
+          }
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{isset($content->field_image->und[0]->realpath) ? $content->field_image->und[0]->realpath : ""}}",
+        "height": 240,
+        "width": 320
+      }
+    }
+  </script>
+@endsection
+
 @section('content') 
   <article>
     <div class="medium-12">

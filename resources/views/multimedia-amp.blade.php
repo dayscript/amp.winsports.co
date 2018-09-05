@@ -1,4 +1,5 @@
 <?php use App\Http\Controllers\ArticleController;?>
+
 @extends('layouts.amp')
 
 @section('title', 'Page Title')
@@ -19,7 +20,7 @@
       "author": {
           "@type": "Organization",
           "name": "Win Sports",
-          "description": "El canal oficial de la Liga y el Fútbol Profesional Colombiano. Encontrarás, además, la mejor información de Baloncesto, Futsal y Otros Deportes.",
+          "description": "El canal oficial de la Liga y el Fútbol Profesional Colombiano. Encontrarás, además, la mejor información de Baloncesto, Futsal y Otros Deportes."
       },
       "publisher": {
           "@type": "Organization",

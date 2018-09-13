@@ -66,12 +66,15 @@
     </div>
 
     @if( isset($content->field_codigo_mediastream->und[0]) )
-      <amp-img src="{{$content->field_image->und[0]->realpath}}"
-        width="450"
-        height="300"
+      <amp-iframe
+        width="600"
+        height="400"
+        sandbox="allow-scripts allow-same-origin allow-presentation"
         layout="responsive"
-        alt="winsports">
-      </amp-img>
+        frameborder="0"
+        src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
+        <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
+      </amp-iframe>
     @endif
 
     @if( isset($content->body->und[0]->value ) )

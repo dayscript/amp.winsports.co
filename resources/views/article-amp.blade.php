@@ -84,24 +84,15 @@
           @break
 
           @case('mediastream') {{-- Mediastream --}}
-          <amp-img alt="A view of the sea"
-            src="{{$content->field_image->und[0]->realpath}}"
-            width="{{$content->field_image->und[0]->width}}"
-            height="{{$content->field_image->und[0]->height}}"
-            layout="responsive">
-          </amp-img>
-          {{-- <amp-nexxtv-player
-            data-mediaid="{{$content->field_codigo_mediastream->value[0]->value}}"
-            data-client="761"
-            data-streamtype="video"
-            data-seek-to="2"
-            data-mode="static"
-            data-origin="https://embed.nexx.cloud/"
-            data-disable-ads="1"
-            data-streaming-filter="nxp-bitrate-2500"
-            layout="responsive"
-            width="480" height="270">
-          </amp-nexxtv-player> --}}
+            <amp-iframe
+              width="600"
+              height="400"
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              layout="responsive"
+              frameborder="0"
+              src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
+              <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
+            </amp-iframe>
           @break
 
           @default

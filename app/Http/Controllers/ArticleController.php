@@ -404,17 +404,16 @@ class ArticleController extends Controller
      */
 
     public static function getMediaId($string){
+
       if(strpos($string,'https://youtu.be/') !== false ){
         return substr(parse_url($string,PHP_URL_PATH),1);
       }
+
       if(strpos($string,'https://www.youtube.com/watch') !== false){
         parse_str(parse_url($string,PHP_URL_QUERY), $output);
         return $output['v'];
       }
-      if(strpos($string,'https://www.youtube.com/embed/') !== false){
-        $output = substr($string, 30);
-        return $output; 
-      }
+
     }
 
     public static function getThumbnail($string){

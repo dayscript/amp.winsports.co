@@ -130,6 +130,7 @@ class ArticleController extends Controller
       $assetType = self::assetType($content);
 
       if(isset($content->body->und[0]->value)){
+        $content->body->und[0]->value = self::getPropertiesImg($content->body->und[0]->value);
         $amp->loadHtml($content->body->und[0]->value);
         $content->body->und[0]->value = $amp->convertToAmpHtml();
       }
@@ -179,6 +180,7 @@ class ArticleController extends Controller
       }
 
       if(isset($content->body->und[0]->value)){
+        $content->body->und[0]->value = self::getPropertiesImg($content->body->und[0]->value);
         $amp->loadHtml($content->body->und[0]->value);
         $content->body->und[0]->value = $amp->convertToAmpHtml();
       }
@@ -419,6 +421,32 @@ class ArticleController extends Controller
 
     public static function getThumbnail($string){
       return 'https://i.ytimg.com/vi/'. self::getMediaId($string) .'/hqdefault.jpg';
+    }
+
+    /**
+     * Return asset type 'Properties Img Amp'
+     *
+     * @param  $content String
+     * @return $type String
+     */
+
+    public static function getPropertiesImg($content){
+      preg_match_all('/<(img)[^>](?:(style|src|alt)="(.*?)")[^>]*>/is', $content, $matches);
+      $imgs = $matches[0];
+
+      if($imgs && $imgs > 0) {
+        foreach ($imgs as $key => $img) {
+          preg_match('@src="([^"]+)"@', $img, $array); $src = array_pop($array);
+          preg_match('@alt="([^"]+)"@', $img, $array); $alt = array_pop($array);
+          preg_match('@style="([^"]+)"@', $img, $array); $style = array_pop($array);
+          // preg_match('@width:([^;]+)px;@', $style, $array); $width = array_pop($array);
+          // preg_match('@height:([^;]+)px;@', $style, $array); $height = array_pop($array);
+          $img_amp = '<amp-img alt="'.$alt.'"  src="'.$src.'" width="320" height="210"></amp-img>';
+
+          $content = str_replace($img, $img_amp, $content);
+        }
+      }     
+      return $content; 
     }
 
 }

@@ -194,7 +194,7 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function showAmpMultimedia($type, $category, $title){
+    public function showAmpMultimediaNonCategory($type, $title){
       $re = '/[0-9]+\s*$/';
       $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
 
@@ -225,7 +225,42 @@ class ArticleController extends Controller
       return view('multimedia', compact('article','content','assetType') );
     }
 
+    /**
+     * Show the specified resource for Google AMP.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+     */
+    public function showAmpMultimedia($type, $category, $title){
+      $re = '/[0-9]+\s*$/';
+      $extract_nid = preg_match($re, $title, $nid, PREG_OFFSET_CAPTURE, 0);
 
+      if(!$extract_nid){
+        return view('not-found');
+      }
+
+      $nid = $nid[0][0];
+      $article = Article::where('nid',$nid)->first();
+
+      if( !$article ){
+          $amazon_data = self::getAwsItem($nid);
+          $article = new Article();
+          $article->nid = $amazon_data->nid;
+          $article->type = $amazon_data->type;
+          $article->path = $amazon_data->path;
+          $article->content = json_encode($amazon_data);
+          $article->save();
+      }
+      
+      $content = json_decode($article->content);
+      $assetType = self::assetType($content);
+
+      if( isset($_GET['json']) ){
+          return response()->json($content);
+      }
+
+      return view('multimedia', compact('article','content','assetType') );
+    }
 
     /**
      * Show the specified resource for Google AMP.
@@ -334,8 +369,6 @@ class ArticleController extends Controller
 
       return view('gallery', compact('article','content','assetType') );
     }
-
-
 
     /**
      * GET the specified resource for Amazon S3

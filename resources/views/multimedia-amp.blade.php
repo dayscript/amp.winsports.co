@@ -89,7 +89,9 @@
               layout="responsive"
               frameborder="0"
               src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
-              <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
+              @if(isset($content->field_image->und[0]->realpath))
+                <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
+              @endif
             </amp-iframe>
           @endif    
         @break

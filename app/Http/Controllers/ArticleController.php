@@ -254,7 +254,6 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
-      //dd($content->field_image->und);
       $assetType = self::assetType($content);
 
       if( isset($_GET['json']) ){
@@ -291,7 +290,6 @@ class ArticleController extends Controller
           $article->save();
       }
       $content = json_decode($article->content);
-      // dd($content);
       $assetType = self::assetType($content);
 
       if( isset($_GET['json']) ){
@@ -373,7 +371,7 @@ class ArticleController extends Controller
           return 'youtube';
         }elseif( strpos($content->field_url->und[0]->value, 'player.vimeo.com') !== false ){
             return 'vimeo';
-        }else{
+        }elseif( strpos($content->field_url->und[0]->value, 'facebook') == false ){
             return 'jwplayer';
         }
       }

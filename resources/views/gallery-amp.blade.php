@@ -43,20 +43,20 @@
 @section('content')
   <article>
     <div class="medium-12">
-      <span class="medium-4 text-left text-category uppercase">{{ $content->field_categoria->und[0]->name }}</span>
-      <span class="medium-8 text-right">{{ Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString() }}</span>
+      <span class="medium-4 text-left text-category uppercase">{{$content->field_categoria->und[0]->name}}</span>
+      <span class="medium-8 text-right">{{Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString()}}</span>
     </div>
 
     <h1>{{$content->title}}</h1>
 
     @if( isset($content->field_lead->und[0]->value))
-      <em> {{ $content->field_lead->und[0]->value }} </em>
+      <em> {{$content->field_lead->und[0]->value}} </em>
     @endif
 
 
     <div class="medium-12">
       <div class="medium-4">
-        <span class="autor" >Por: {{ $content->field_fuente->und[0]->name }}</span>
+        <span class="autor" >Por: {{$content->field_fuente->und[0]->name}}</span>
       </div>
       <div class="medium-8 social">
         <amp-social-share type="twitter" width="30" height="30"></amp-social-share>

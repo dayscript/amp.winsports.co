@@ -45,21 +45,21 @@
 @section('content')
   <article>
     <div class="medium-12">
-      <span class="medium-4 text-left text-category uppercase">{{ $content->field_categoria->und[0]->name }}</span>
-      <span class="medium-8 text-right">{{ Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString() }}</span>
+      <span class="medium-4 text-left text-category uppercase">{{$content->field_categoria->und[0]->name}}</span>
+      <span class="medium-8 text-right">{{Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString()}}</span>
     </div>
 
     <h1>{{$content->title}}</h1>
 
-    @if( isset($content->field_lead->und[0]->value))
-      <em> {{ $content->field_lead->und[0]->value }} </em>
+    @if(isset($content->field_lead->und[0]->value))
+      <em> {{$content->field_lead->und[0]->value}} </em>
     @endif
 
 
     <div class="medium-12">
       <div class="medium-4">
         @if(isset($content->field_fuente->und[0]->name))
-        <span class="autor" >Por: {{ $content->field_fuente->und[0]->name }}</span>
+        <span class="autor" >Por: {{$content->field_fuente->und[0]->name}}</span>
         @endif
       </div>
       <div class="medium-8 social">
@@ -74,29 +74,31 @@
     {{-- Type Video --}}
     @if( isset($content->field_is_video_article->und[0]->value ) && $content->field_is_video_article->und[0]->value )
       @switch($assetType)
-          @case('jwplayer') {{-- JWPlayer id   --}}
-          <amp-jwplayer
-            data-player-id="Oy6uifW8"
-            data-media-id="{{$content->field_url->und[0]->value}}"
-            layout="responsive"
-            width="16" height="9">
-          </amp-jwplayer>
-          @break
-
-          @case('mediastream') {{-- Mediastream --}}
-            <amp-iframe
-              width="600"
-              height="400"
-              sandbox="allow-scripts allow-same-origin allow-presentation"
-              layout="responsive"
-              frameborder="0"
-              src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
-              <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
-            </amp-iframe>
-          @break
-
-          @default
+          @case('jwplayer') {{-- JWPlayer --}}
             @if(isset($content->field_url->und[0]->value))
+              <amp-jwplayer
+                data-player-id="Oy6uifW8"
+                data-media-id="{{$content->field_url->und[0]->value}}"
+                layout="responsive"
+                width="16" height="9">
+              </amp-jwplayer>
+            @endif
+          @break
+          @case('mediastream') {{-- Mediastream --}}
+            @if(isset($content->field_codigo_mediastream->und[0]->value))
+              <amp-iframe
+                width="600"
+                height="400"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                layout="responsive"
+                frameborder="0"
+                src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
+                <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
+              </amp-iframe>
+             @endif
+          @break
+          @default
+            @if(isset($content->field_url->und[0]->value) && ArticleController::getMediaId($content->field_url->und[0]->value))
               <amp-youtube
                 data-videoid="{{ArticleController::getMediaId($content->field_url->und[0]->value)}}"
                 layout="responsive"
@@ -106,7 +108,7 @@
       @endswitch
     @endif
     {{-- Type Image --}}
-    @if( isset($content->field_image->und[0]->realpath) && !isset($content->field_is_video_article->und[0]->value ) )
+    @if(isset($content->field_image->und[0]->realpath) && !isset($content->field_is_video_article->und[0]->value))
       <amp-img alt="A view of the sea"
         src="{{$content->field_image->und[0]->realpath}}"
         width="{{$content->field_image->und[0]->width}}"
@@ -115,7 +117,7 @@
       </amp-img>
     @endif
 
-    @if( isset($content->body->und[0]->value ) )
+    @if(isset($content->body->und[0]->value))
       <div>
         {!!$content->body->und[0]->value!!}
       </div>

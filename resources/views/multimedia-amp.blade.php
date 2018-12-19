@@ -45,20 +45,20 @@
 @section('content') 
   <article>
     <div class="medium-12">
-      <span class="medium-4 text-left text-category uppercase">{{ $content->field_categoria->und[0]->name }}</span>
-      <span class="medium-8 text-right">{{ Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString() }}</span>
+      <span class="medium-4 text-left text-category uppercase">{{$content->field_categoria->und[0]->name}}</span>
+      <span class="medium-8 text-right">{{Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString()}}</span>
     </div>
 
     <h1>{{$content->title}}</h1>
 
     @if( isset($content->field_lead->und[0]->value))
-      <em> {{ $content->field_lead->und[0]->value }} </em>
+      <em> {{$content->field_lead->und[0]->value}} </em>
     @endif
 
 
     <div class="medium-12">
       <div class="medium-4">
-        <span class="autor" >Por: {{ $content->field_fuente->und[0]->name }}</span>
+        <span class="autor" >Por: {{$content->field_fuente->und[0]->name}}</span>
       </div>
       <div class="medium-8 social">
         <amp-social-share type="twitter" width="30" height="30"></amp-social-share>
@@ -70,16 +70,18 @@
     </div>
 
     @switch($assetType)
-        @case('jwplayer') {{-- JWPlayer id   --}}
-        <amp-jwplayer
-          data-player-id="Oy6uifW8"
-          data-media-id="{{$content->field_id_jwplayer->und[0]->value}}"
-          layout="responsive"
-          width="16" height="9">
-        </amp-jwplayer>
+        @case('jwplayer') {{-- JWPlayer --}}
+          @if(isset($content->field_id_jwplayer->und[0]->value))
+            <amp-jwplayer
+              data-player-id="Oy6uifW8"
+              data-media-id="{{$content->field_id_jwplayer->und[0]->value}}"
+              layout="responsive"
+              width="16" height="9">
+            </amp-jwplayer>
+          @endif
         @break
-
         @case('mediastream') {{-- Mediastream --}}
+          @if(isset($content->field_codigo_mediastream->und[0]->value))
             <amp-iframe
               width="600"
               height="400"
@@ -89,16 +91,19 @@
               src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
               <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
             </amp-iframe>
+          @endif    
         @break
         @case('vimeo') {{-- Vimeo --}}
        
         @break
         @default
-        <amp-youtube
-          data-videoid="{{ArticleController::getMediaId($content->field_url->und[0]->value)}}"
-          layout="responsive"
-          width="480" height="270">
-        </amp-youtube>
+          @if(isset($content->field_url->und[0]->value) && ArticleController::getMediaId($content->field_url->und[0]->value))
+            <amp-youtube
+              data-videoid="{{ArticleController::getMediaId($content->field_url->und[0]->value)}}"
+              layout="responsive"
+              width="480" height="270">
+            </amp-youtube>
+          @endif
     @endswitch
 
     @if( isset($content->body->und[0]->value ) )

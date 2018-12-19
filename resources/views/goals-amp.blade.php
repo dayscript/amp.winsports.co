@@ -43,13 +43,13 @@
 @section('content')
   <article>
     <div class="medium-12">
-      <span class="medium-8 text-right">{{ Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString() }}</span>
+      <span class="medium-8 text-right">{{Carbon\Carbon::createFromTimestamp($content->changed,'America/Bogota')->toDayDateTimeString()}}</span>
     </div>
 
     <h1>{{$content->title}}</h1>
 
     @if( isset($content->field_lead->und[0]->value))
-      <em> {{ $content->field_lead->und[0]->value }} </em>
+      <em> {{$content->field_lead->und[0]->value}} </em>
     @endif
 
 
@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    @if( isset($content->field_codigo_mediastream->und[0]) )
+    @if(isset($content->field_codigo_mediastream->und[0]))
       <amp-iframe
         width="600"
         height="400"

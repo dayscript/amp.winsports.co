@@ -93,9 +93,7 @@
                 layout="responsive"
                 frameborder="0"
                 src="https://mdstrm.com/embed/{{$content->field_codigo_mediastream->und[0]->value}}?jsapi=true&autoplay=false&mse=true">
-                @if(isset($content->field_image->und[0]->realpath))
-                  <amp-img layout="fill" src="{{$content->field_image->und[0]->realpath}}" placeholder></amp-img>
-                @endif
+                <amp-img layout="fill" src="{{isset($content->field_image->und[0]->realpath) ? $content->field_image->und[0]->realpath : 'https://www.winsports.co/assets/img/win/winsports_2017.png'}}" placeholder></amp-img>
               </amp-iframe>
              @endif
           @break

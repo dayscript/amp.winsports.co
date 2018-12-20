@@ -26,6 +26,7 @@ Route::amp('{type}/{category}/noticias/{title}', ['as' => 'articleForCategory', 
 
 Route::amp('{type}/multimedia/galeria-goles/{title}', ['as' => 'multimediaForGalleryGoals', 'uses' => 'ArticleController@showAmpGalleryGoalsMultimedia']);
 
+Route::amp('{type}/galeria-compactos/{title}', ['as' => 'multimediaForGalleryGoals', 'uses' => 'ArticleController@showAmpGalleryGoalsMultimedia']);
 Route::amp('{type}/{category}/multimedia/galeria-compactos/{title}', ['as' => 'nada', 'uses' => 'ArticleController@showAmpGallery']);
 Route::amp('{type}/multimedia/galeria-compactos/{title}', ['category' => '', 'as' => 'multimediaForGalleryGoals', 'uses' => 'ArticleController@showAmpGalleryGoalsMultimedia']);
 
@@ -34,7 +35,3 @@ Route::amp('{type}/{category}/multimedia/videos/{title}', ['as' => 'multimediaFo
 
 Route::amp('{type}/multimedia/galeria-imagenes/{title}', ['as' => 'multimediaForGalleryNonCategory', 'uses' => 'ArticleController@showAmpGalleryMultimediaNonCategory']);
 Route::amp('{type}/{category}/multimedia/galeria-imagenes/{title}', ['as' => 'nada', 'uses' => 'ArticleController@showAmpGallery']);
-
-
-
-

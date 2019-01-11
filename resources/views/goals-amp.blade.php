@@ -25,7 +25,7 @@
           "name": "Win Sports",
           "logo": {
               "@type": "ImageObject",
-              "url": "https://www.winsports.co/logo-win-micro_2017.png",
+              "url": "https://www.winsports.co/assets/img/win/logo-win-micro_2017.png",
               "width": 113,
               "height": 60
           }

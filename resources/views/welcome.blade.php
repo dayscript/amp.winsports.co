@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="http://www.winsports.co/assets/img/icon/winsports.ico" type="image/vnd.microsoft.icon">
+        <link rel="shortcut icon" href="http://www.winsports.co/assets/img/icon/winsports.ico" type="image/ico" rel="icon">
 
         <!-- Styles -->
         <style>

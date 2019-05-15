@@ -18,7 +18,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-      <link rel="shortcut icon" href="https://www.winsports.co/assets/img/icon/winsports.ico" type="image/ico" rel="icon">
+      <link rel="shortcut icon" href="https://www.winsports.co/assets/img/icon/winsports.ico" type="image/ico">
       <title>{{$content->title}} | Win Sports</title>
       <style amp-custom>
         body {
